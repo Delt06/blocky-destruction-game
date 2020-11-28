@@ -11,9 +11,9 @@ public sealed class Chunk : MonoBehaviour
 	public void SetSphere(Vector3 worldCenter, float radius, [NotNull] IBlock block)
 	{
 		if (block == null) throw new ArgumentNullException(nameof(block));
-		
+
 		var modified = 0;
-		
+
 		for (var x = -radius; x <= radius; x++)
 		{
 			for (var y = -radius; y <= radius; y++)
@@ -22,7 +22,7 @@ public sealed class Chunk : MonoBehaviour
 				{
 					var offset = new Vector3(x, y, z);
 					if (offset.magnitude > radius) continue;
-					
+
 					var position = worldCenter + offset;
 					if (!TryConvertToBlockIndex(position, out var blockIndex)) continue;
 					if (Blocks[blockIndex.x, blockIndex.y, blockIndex.z] == block) continue;
@@ -32,7 +32,7 @@ public sealed class Chunk : MonoBehaviour
 				}
 			}
 		}
-		
+
 		if (modified > 0)
 			Modified?.Invoke(this, EventArgs.Empty);
 	}
@@ -79,7 +79,7 @@ public sealed class Chunk : MonoBehaviour
 	}
 
 	public event EventHandler Modified;
-	
+
 	public IBlock this[Vector3Int position]
 	{
 		get => this[position.x, position.y, position.z];

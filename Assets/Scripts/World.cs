@@ -29,7 +29,7 @@ public sealed class World : MonoBehaviour
 	{
 		if (Application.isPlaying) return;
 		if (_chunkPrefab == null) return;
-		
+
 		Gizmos.color = Color.green;
 		var size = new Vector3(_chunksX * _chunkPrefab.SizeX, 0, _chunksZ * _chunkPrefab.SizeZ);
 		Gizmos.DrawCube(transform.position + _offset + size / 2f, size);
