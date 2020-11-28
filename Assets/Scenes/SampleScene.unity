@@ -467,3 +467,4 @@ MonoBehaviour:
     type: 3}
   _height: 10
   _maxDistance: 100
+  _initialVelocity: {x: 0, y: -15, z: 0}
