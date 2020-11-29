@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Factories;
+using UnityEngine;
 
 namespace Effects
 {

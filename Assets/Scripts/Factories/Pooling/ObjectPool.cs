@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pooling
+namespace Factories.Pooling
 {
 	public class ObjectPool : MonoBehaviour, ISpawner<GameObject>
 	{
