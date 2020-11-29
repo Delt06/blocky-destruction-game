@@ -6,13 +6,14 @@ namespace TNT
 	public sealed class Tnt : MonoBehaviour
 	{
 		[SerializeField] private float _radius = 5f;
+		[SerializeField] private ExplosionMode _onExploded = ExplosionMode.Destroy;
 
 		private void OnCollisionEnter(Collision other)
 		{
 			Explode();
 		}
 
-		private void Explode()
+		public void Explode()
 		{
 			var contactsCount = Physics.OverlapSphereNonAlloc(transform.position, _radius, _contacts);
 
@@ -25,11 +26,28 @@ namespace TNT
 			}
 
 			Exploded?.Invoke(this, EventArgs.Empty);
-			Destroy(gameObject);
+
+			switch (_onExploded)
+			{
+				case ExplosionMode.Destroy:
+					Destroy(gameObject);
+					break;
+				case ExplosionMode.Disable:
+					gameObject.SetActive(false);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 		}
 
 		public event EventHandler Exploded;
 
 		private readonly Collider[] _contacts = new Collider[16];
+
+		private enum ExplosionMode
+		{
+			Destroy,
+			Disable
+		}
 	}
 }
